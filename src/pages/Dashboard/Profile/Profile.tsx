@@ -13,6 +13,7 @@ type TProfile = {
 };
 
 const Profile = () => {
+
   const { data, isError, isLoading } = useGetMyProfileQuery(undefined)
   console.log(data, 'data');
   if (isError) {
