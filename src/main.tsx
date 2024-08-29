@@ -12,7 +12,7 @@ createRoot(document.getElementById('root')!).render(
     <Provider store={store}>
       <ReactNotifications />
       <PersistGate loading={null} persistor={persistor}>
-        <AppRoutes />  {/* Use the AppRoutes component here */}
+        <AppRoutes />
       </PersistGate>
     </Provider>
   </StrictMode>
