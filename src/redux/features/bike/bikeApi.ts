@@ -1,3 +1,4 @@
+import { BikeFormData } from "@/pages/Dashboard/AddBike/AddBike";
 import { baseApi } from "@/redux/api/baseApi";
 
 export const bikeApi = baseApi.injectEndpoints({
@@ -52,9 +53,32 @@ export const bikeApi = baseApi.injectEndpoints({
         }
       },
       invalidatesTags:['Bikes']
+    }),
+    addABike:builder.mutation({
+      query:(bikeInfo:BikeFormData)=>{
+        const updatedBikeInfo = {
+          name:bikeInfo.name,
+          description:bikeInfo.description,
+          pricePerHour:bikeInfo.pricePerHour,
+          imageUrl:bikeInfo.imageUrl,
+          isAvailable:bikeInfo.isAvailable,
+          cc:bikeInfo.cc,
+          year:bikeInfo.year,
+          model:bikeInfo.model,
+          brand:bikeInfo.brand
+        }
+        console.log(updatedBikeInfo,'updated');
+        return {
+          url:`/bikes`,
+          method:"POST",
+          body:updatedBikeInfo
+        }
+      },
+      invalidatesTags:['Bikes']
+     
     })
   })
 })
 
 
-export const {useGetAllBikesQuery,useGetSingleBikeQuery,useRentABikeMutation,useGetStatusOfMyRentalBikeQuery,useDeleteABikeMutation,useUpdateABikeInformationMutation} = bikeApi;
+export const {useGetAllBikesQuery,useGetSingleBikeQuery,useRentABikeMutation,useGetStatusOfMyRentalBikeQuery,useDeleteABikeMutation,useUpdateABikeInformationMutation,useAddABikeMutation} = bikeApi;
