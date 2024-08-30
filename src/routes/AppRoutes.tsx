@@ -5,7 +5,7 @@ import Protected from "@/layouts/Protected";
 import About from "@/pages/About/About";
 import AvailableBikes from "@/pages/AvailableBikes/AvailableBikes";
 import Bikes from "@/pages/Bikes/Bikes";
-import DeleteBike from "@/pages/Dashboard/DeleteBike/DeleteBike";
+import ManageBike from "@/pages/Dashboard/ManageBike/ManageBike";
 import MyRentals from "@/pages/Dashboard/MyRentals/MyRentals";
 import Profile from "@/pages/Dashboard/Profile/Profile";
 import UserManagement from "@/pages/Dashboard/UserManagement/UserManagement";
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
       { path: 'update-profile', element: <UpdateProfile /> },
       { path: 'my-rentals', element: <MyRentals /> },
       { path: 'user-management', element: <UserManagement /> },
-      { path: 'delete-bike', element: <DeleteBike /> },
+      { path: 'manage-bike', element: <ManageBike /> },
     ],
   },
 ]);

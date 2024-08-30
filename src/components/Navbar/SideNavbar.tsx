@@ -89,9 +89,8 @@ const SideNavbar = () => {
 
   const bikeManagementItems: DropdownItem[] = [
     { text: 'Add Bike', href: '/dashboard/add-bike' },
-    { text: 'Edit Bike', href: '/dashboard/edit-bike' },
-    { text: 'Delete Bike', href: '/dashboard/delete-bike' },
-    { text: 'Update Bike', href: '/dashboard/update-bike' },
+    { text: 'Manage Bikes', href: '/dashboard/manage-bike' },
+
   ];
 
   const navItems = user?.role === 'admin' ? adminNavItems : userNavItems;
