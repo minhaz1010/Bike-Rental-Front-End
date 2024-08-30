@@ -53,7 +53,7 @@ const AddBike: React.FC = () => {
         position: "top-right",
         duration: 3000
       })
-      console.log(err);
+      console.error(err);
     }
 
   };

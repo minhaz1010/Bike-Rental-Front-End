@@ -39,7 +39,6 @@ const Login: React.FC = () => {
 
       if (response.success) {
         const accessToken = response.token;
-        console.log('access token', accessToken);
         dispatch(logInAUser({ accessToken }));
         navigate('/dashboard/available-bikes', { state: { message: 'Login successful!' } });
         toast.success("Login successful!", {

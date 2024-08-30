@@ -11,7 +11,6 @@ const Protected = ({ children }: { children: ReactNode }) => {
 
 
   if (!token) {
-    console.log('No token found');
     return <Navigate to="/login" replace />;
   }
 
@@ -28,11 +27,10 @@ const Protected = ({ children }: { children: ReactNode }) => {
     if (error instanceof InvalidTokenError) {
       // * if token is malformed jaaa login e jaa
       dispatch(logOutAUser())
-      console.log('Error decoding token:', error.message);
       return <Navigate to="/login" replace />;
 
     } else {
-      console.log('An unknown error occurred');
+      console.error('An unknown error occurred Protected');
       return <Navigate to="/login" replace />;
     }
   }

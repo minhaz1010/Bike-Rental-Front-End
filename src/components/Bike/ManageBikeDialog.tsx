@@ -52,16 +52,14 @@ const ManageBikeDialog: React.FC<ManageBikeDialogProps> = ({ bike, onDelete }) =
         description: formData.description,
         isAvailable: formData.isAvailable,
       };
-      console.log(formData, 'form data')
-      const res = await updateABike(bikeInfo).unwrap();
-      console.log(res);
+      await updateABike(bikeInfo).unwrap();
       setIsUpdateOpen(false);
       toast.success('Updated Successfully', {
         position: "top-right",
         duration: 2500,
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast.error("Something Wrong happened", {
         position: "top-right",
         duration: 3000,
@@ -84,7 +82,7 @@ const ManageBikeDialog: React.FC<ManageBikeDialogProps> = ({ bike, onDelete }) =
         onUpdate={handleUpdate}
       />
 
-      <Button variant="destructive" className="text-xl py-3 px-6" onClick={() => setIsDeleteOpen(true)}>
+      <Button className=" bg-blue-500 text-xl py-3 px-6" onClick={() => setIsDeleteOpen(true)}>
         Delete
       </Button>
       <Button variant="default" className="text-xl" onClick={() => setIsUpdateOpen(true)}>

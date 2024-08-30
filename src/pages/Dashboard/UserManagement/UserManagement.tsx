@@ -45,8 +45,7 @@ const UserManagement: React.FC = () => {
   const handleDeleteUser = async (id: string) => {
 
     try {
-      const res = await deleteAUser({ id }).unwrap()
-      console.log(res, 'res');
+      await deleteAUser({ id }).unwrap()
 
       toast.success('User deleted successfully!', {
         duration: 2000,

@@ -32,7 +32,7 @@ const SingleBike = () => {
       jwtDecode(token as string);
       setIsModalOpen(true);
     } catch (error) {
-      console.log('Invalid token', error);
+      console.error('Invalid token', error);
       navigate('/login');
     }
   };

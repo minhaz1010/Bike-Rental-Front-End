@@ -45,7 +45,6 @@ export const profileApi = baseApi.injectEndpoints({
     }),
     deleteAUser:builder.mutation({
       query:(id)=>{
-        console.log(id,'id from api');
         return {
           url:"/users/delete-a-user",
           method:"DELETE",

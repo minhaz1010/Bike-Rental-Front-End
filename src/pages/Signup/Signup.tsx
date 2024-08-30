@@ -39,8 +39,7 @@ const SignUp: React.FC = () => {
       address: data.address
     }
 
-    const finalData = await signUpData(userInfo).unwrap();
-    console.log('finalData', finalData);
+    await signUpData(userInfo).unwrap();
     navigate('/login', { state: { message: 'Registration successful, please log in.' } });
   };
 

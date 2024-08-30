@@ -34,7 +34,6 @@ export const bikeApi = baseApi.injectEndpoints({
     deleteABike:builder.mutation({
       query:(userInfo)=>{
         const {id} = userInfo;
-        console.log(id,'id from api');
         return {
           url:`/bikes/${id}`,
           method:"DELETE"
@@ -44,8 +43,6 @@ export const bikeApi = baseApi.injectEndpoints({
     }),
     updateABikeInformation:builder.mutation({
       query:(bikeInfo)=>{
-        console.log('bikeInf',bikeInfo);
-        console.log(bikeInfo.id);
         return {
           url:`/bikes/${bikeInfo.id}`,
           method:"PUT",
@@ -67,7 +64,6 @@ export const bikeApi = baseApi.injectEndpoints({
           model:bikeInfo.model,
           brand:bikeInfo.brand
         }
-        console.log(updatedBikeInfo,'updated');
         return {
           url:`/bikes`,
           method:"POST",

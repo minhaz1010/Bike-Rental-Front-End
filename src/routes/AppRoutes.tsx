@@ -4,7 +4,7 @@ import MainLayout from "@/layouts/MainLayout";
 import Protected from "@/layouts/Protected";
 import About from "@/pages/About/About";
 import AvailableBikes from "@/pages/AvailableBikes/AvailableBikes";
-import Bikes from "@/pages/Bikes/Bikes";
+// import Bikes from "@/pages/Bikes/Bikes";
 import AddBike from "@/pages/Dashboard/AddBike/AddBike";
 import ManageBike from "@/pages/Dashboard/ManageBike/ManageBike";
 import MyRentals from "@/pages/Dashboard/MyRentals/MyRentals";
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     children: [
       { path: '/', element: <Home /> },
       { path: 'about', element: <About /> },
-      { path: 'all-bikes', element: <Bikes /> },
+      { path: 'all-bikes', element: <AvailableBikes /> },
       { path: '/bikes/:id', element: <SingleBike /> },
       { path: 'signup', element: <SignUp /> },
       { path: 'login', element: <Login /> },
