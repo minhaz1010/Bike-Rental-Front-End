@@ -2,7 +2,8 @@
 
 
 import { logOutAUser } from '@/redux/features/auth/authSlice';
-import { useAppDispatch } from '@/redux/hook';
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
+import { decodeToken } from '@/utils/DecodeJwt';
 import { useState, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -22,10 +23,13 @@ interface DropdownItem {
 const SideNavbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const [isSmallDevice, setIsSmallDevice] = useState<boolean>(false);
+  const token = useAppSelector((state) => state.auth.token);
+  const payload = decodeToken(token as string);
+  const { role } = payload;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const user = {
-    role: "admin"
+    role
   }
 
   useEffect(() => {
