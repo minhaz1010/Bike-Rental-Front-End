@@ -40,9 +40,21 @@ export const bikeApi = baseApi.injectEndpoints({
         }
       },
       invalidatesTags:['Bikes']
+    }),
+    updateABikeInformation:builder.mutation({
+      query:(bikeInfo)=>{
+        console.log('bikeInf',bikeInfo);
+        console.log(bikeInfo.id);
+        return {
+          url:`/bikes/${bikeInfo.id}`,
+          method:"PUT",
+          body:bikeInfo
+        }
+      },
+      invalidatesTags:['Bikes']
     })
   })
 })
 
 
-export const {useGetAllBikesQuery,useGetSingleBikeQuery,useRentABikeMutation,useGetStatusOfMyRentalBikeQuery,useDeleteABikeMutation} = bikeApi;
+export const {useGetAllBikesQuery,useGetSingleBikeQuery,useRentABikeMutation,useGetStatusOfMyRentalBikeQuery,useDeleteABikeMutation,useUpdateABikeInformationMutation} = bikeApi;
