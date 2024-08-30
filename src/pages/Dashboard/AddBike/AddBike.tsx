@@ -60,7 +60,7 @@ const AddBike: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto roboto-condensed p-4 md:p-6 lg:p-8">
-      <h1 className='text-teal-500 text-3xl md:text-4xl lg:text-5xl text-center mb-6'>Add New Bike</h1>
+      <h1 className=' text-3xl md:text-4xl lg:text-5xl text-center mb-6'>Add New Bike</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
