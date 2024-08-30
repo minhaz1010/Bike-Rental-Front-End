@@ -35,18 +35,18 @@ const Profile = () => {
           />
         </div>
         <div className="w-full md:w-2/3 p-6">
-          <h2 className="text-7xl   text-teal-700 mb-4">{profile.name}</h2>
+          <h2 className="text-7xl   text-sky-700 mb-4">{profile.name}</h2>
           <div className="space-y-4">
-            <div className="flex items-center text-teal-700">
-              <Mail className="size-6 mr-3 text-indigo-500  flex-shrink-0" />
+            <div className="flex items-center text-sky-700">
+              <Mail className="size-6 mr-3 text-red-500  flex-shrink-0" />
               <span className=" text-2xl md:text-3xl">{profile.email}</span>
             </div>
-            <div className="flex items-center text-teal-700">
-              <Phone className="size-6 mr-3 text-indigo-500 flex-shrink-0" />
+            <div className="flex items-center text-sky-700">
+              <Phone className="size-6 mr-3 text-red-500 flex-shrink-0" />
               <span className='text-2xl md:text-3xl'>{profile.phone}</span>
             </div>
-            <div className="flex items-center text-teal-700">
-              <MapPin className="size-6 mr-3 text-indigo-500 flex-shrink-0" />
+            <div className="flex items-center text-sky-700">
+              <MapPin className="size-6 mr-3 text-red-500 flex-shrink-0" />
               <span className='text-2xl md:text-3xl'>{profile.address}</span>
             </div>
           </div>
