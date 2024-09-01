@@ -1,5 +1,5 @@
-import { BikeFormData } from "@/pages/Dashboard/AddBike/AddBike";
 import { baseApi } from "@/redux/api/baseApi";
+import { TBikeFormData } from "@/types/schema.type";
 
 export const bikeApi = baseApi.injectEndpoints({
   endpoints:(builder) =>({
@@ -85,7 +85,7 @@ export const bikeApi = baseApi.injectEndpoints({
     }),
   
     addABike:builder.mutation({
-      query:(bikeInfo:BikeFormData)=>{
+      query:(bikeInfo:TBikeFormData)=>{
         const updatedBikeInfo = {
           name:bikeInfo.name,
           description:bikeInfo.description,

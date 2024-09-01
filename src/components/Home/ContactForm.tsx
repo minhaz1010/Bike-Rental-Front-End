@@ -1,32 +1,27 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { Input } from '@/components/ui/input';
 import DescriptionSection from '../Shared/DescriptionSection';
+import { TContactSchema, TFormData } from '@/types/schema.type';
 
-const schema = z.object({
-  name: z.string().min(1, { message: "Name is required" }),
-  email: z.string().email({ message: "Invalid email address" }),
-  message: z.string().min(10, { message: "Message must be at least 10 characters long" }),
-});
 
-type FormData = z.infer<typeof schema>;
+
 
 const ContactForm = () => {
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
-    resolver: zodResolver(schema),
+  const { register, formState: { errors }, } = useForm<TFormData>({
+    resolver: zodResolver(TContactSchema),
   });
 
-  const onSubmit = (data: FormData) => {
-    reset();
-  };
+  // const onSubmit = (data: FormData) => {
+  //   reset();
+  // };
 
   return (
     <section className="new-amsterdam-regular  px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         <DescriptionSection title='contact us' />
         <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-          <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-6">
+          <form className="p-6 space-y-6">
             <div>
               <label htmlFor="name" className="block text-2xl font-medium text-green-700">Name</label>
               <Input

@@ -51,3 +51,11 @@ export const TBikeSchema = z.object({
 
 
 export type TBikeFormData = z.infer<typeof TBikeSchema>;
+
+export const TContactSchema = z.object({
+  name: z.string().min(1, { message: "Name is required" }),
+  email: z.string().email({ message: "Invalid email address" }),
+  message: z.string().min(10, { message: "Message must be at least 10 characters long" }),
+});
+
+export type TFormData = z.infer<typeof TContactSchema>;
