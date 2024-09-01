@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import { useGetAllBikesQuery } from '@/redux/features/bike/bikeApi';
 import { TBike } from '@/types';
@@ -7,6 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Search } from 'lucide-react'
 import BikeCard from './BikeCard';
+import { Button } from "@/components/ui/button"
 
 interface FilterProps {
   onFilterChange: (filters: FilterState) => void;
@@ -19,6 +18,8 @@ interface FilterState {
   search: string;
 }
 
+const ITEMS_PER_PAGE = 9; // Number of bikes per page
+
 const BikeFilter: React.FC<FilterProps> = ({ onFilterChange }) => {
   const [filters, setFilters] = useState<FilterState>({
     brand: '',
@@ -26,6 +27,7 @@ const BikeFilter: React.FC<FilterProps> = ({ onFilterChange }) => {
     isAvailable: null,
     search: '',
   });
+  const [currentPage, setCurrentPage] = useState(1);
 
   const { data, isLoading, isError } = useGetAllBikesQuery(undefined);
   const bikes: TBike[] = data?.data || [];
@@ -59,6 +61,12 @@ const BikeFilter: React.FC<FilterProps> = ({ onFilterChange }) => {
     );
   });
 
+  const totalPages = Math.ceil(filteredBikes.length / ITEMS_PER_PAGE);
+  const paginatedBikes = filteredBikes.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     const newFilters = {
@@ -73,6 +81,7 @@ const BikeFilter: React.FC<FilterProps> = ({ onFilterChange }) => {
       newFilters.model = ''; // Reset model when brand changes
     }
     setFilters(newFilters);
+    setCurrentPage(1); // Reset to first page when filters change
     onFilterChange(newFilters);
   };
 
@@ -86,7 +95,12 @@ const BikeFilter: React.FC<FilterProps> = ({ onFilterChange }) => {
       isAvailable: null // Clear availability filter when searching
     };
     setFilters(newFilters);
+    setCurrentPage(1); // Reset to first page when search changes
     onFilterChange(newFilters);
+  };
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
   };
 
   return (
@@ -156,10 +170,33 @@ const BikeFilter: React.FC<FilterProps> = ({ onFilterChange }) => {
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filteredBikes.map((bike) => (
+        {paginatedBikes.map((bike) => (
           <BikeCard key={bike._id} bike={bike} status='view' />
         ))}
       </div>
+
+      {/* Pagination controls */}
+      {totalPages > 1 && (
+        <div className="flex justify-center items-center space-x-2 mt-8">
+          <Button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            variant="outline"
+          >
+            Previous
+          </Button>
+          <span className="text-xl">
+            Page {currentPage} of {totalPages}
+          </span>
+          <Button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            variant="outline"
+          >
+            Next
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
