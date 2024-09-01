@@ -34,6 +34,7 @@ The Bike Rental Project is a comprehensive platform for a bike lending service. 
 - Password change functionality
 
 ### Bike Browsing
+ - Search Functionality
 - Catalog of available bikes
 - Filtering options by various categories:
   - Brand
