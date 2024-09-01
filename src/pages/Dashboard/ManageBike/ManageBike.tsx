@@ -1,4 +1,5 @@
 import BikeCard from "@/components/Bike/BikeCard";
+import Loading from "@/components/Shared/Loading";
 import { useGetAllBikesQuery } from "@/redux/features/bike/bikeApi";
 import { TBike } from "@/types";
 
@@ -6,8 +7,8 @@ const ManageBike = () => {
   const { data, isLoading, error } = useGetAllBikesQuery(undefined);
 
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading bikes</div>;
+  if (isLoading) return <Loading message="Loading" />
+  if (error) return <Loading message="Some Error Occured" />;
 
 
   const bikes: TBike[] = data?.data;
