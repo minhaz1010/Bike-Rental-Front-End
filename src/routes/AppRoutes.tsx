@@ -12,6 +12,7 @@ import Profile from "@/pages/Dashboard/Profile/Profile";
 import UserManagement from "@/pages/Dashboard/UserManagement/UserManagement";
 import Home from "@/pages/Home/Home";
 import Login from "@/pages/Login/Login";
+import RentManagement from "@/pages/RentManagement/RentManagement";
 import SignUp from "@/pages/Signup/Signup";
 import SingleBike from "@/pages/SingleBike/SingleBike";
 import UpdateProfile from "@/pages/UpdateProfile/UpdateProfile";
@@ -46,6 +47,8 @@ const router = createBrowserRouter([
       { path: 'user-management', element: <UserManagement /> },
       { path: 'manage-bike', element: <ManageBike /> },
       { path: 'add-bike', element: <AddBike /> },
+      { path: 'rent-management', element: <RentManagement /> },
+
     ],
   },
 ]);
