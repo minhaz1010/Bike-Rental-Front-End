@@ -26,7 +26,7 @@ const MissionStatement = () => {
                 key={index}
                 className="hover:shadow-2xl hover:shadow-slate-600 transition-shadow duration-300 overflow-hidden"
               >
-                <CardHeader className="bg-sky-500 text-[#000] p-4">
+                <CardHeader className="bg-teal-900  text-white p-4">
                   <CardTitle className="text-3xl md:text-5xl font-extralight flex items-center">
                     <span className="text-4xl mr-4 ">{point.icon}</span>
                     {point.title}

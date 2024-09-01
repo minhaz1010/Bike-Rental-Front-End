@@ -30,13 +30,13 @@ const CouponsAndDiscount = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12 rounded-xl">
           {promotions.map((promo, index) => (
             <Card key={index} className="bg-white hover:shadow-2xl transition-shadow duration-700 hover:shadow-slate-600   ease-in-out  border-2 ">
-              <CardHeader className="bg-[#1ebe59] text-[#000] p-4">
+              <CardHeader className="bg-teal-900 text-white p-4">
                 <CardTitle className="text-6xl font-extralight text-center ">
 
                   {promo.discount}</CardTitle>
               </CardHeader>
               <CardContent className="p-6 space-y-8">
-                <p className="text-4xl font-light  text-green-600 mb-2"><span className="text-4xl mr-2">🎟️</span>{promo.code}</p>
+                <p className="text-4xl font-light  text-blue-700 mb-2"><span className="text-4xl mr-2">🎟️</span>{promo.code}</p>
                 <p className="text-gray-600 h-24 text-3xl mb-4">{promo.description}</p>
                 <p className="text-2xl text-gray-500 italic">{promo.expiry}</p>
               </CardContent>
@@ -44,7 +44,7 @@ const CouponsAndDiscount = () => {
           ))}
         </div>
         <Card className=" border-2  mx-auto">
-          <CardHeader className="bg-[#1ebe59] text-[#000] p-4">
+          <CardHeader className="bg-teal-900 text-white p-4">
             <CardTitle className=" text-6xl text-center font-light">Apply A Coupon</CardTitle>
           </CardHeader>
           <CardContent className="p-6">
