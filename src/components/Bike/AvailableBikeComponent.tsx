@@ -7,7 +7,9 @@ import { useGetAllBikesQuery } from '@/redux/features/bike/bikeApi';
 import BikeFilter from './BikeFilter';
 
 const AvailableBikeComponent: React.FC = () => {
-  const { isError, isLoading } = useGetAllBikesQuery(undefined);
+  const { isError, isLoading } = useGetAllBikesQuery(undefined, {
+    pollingInterval: 10000
+  });
 
   if (isLoading) return <Loading message="loading" />;
   if (isError) return <Loading message="sorry some error occurred" />;

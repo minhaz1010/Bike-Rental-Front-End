@@ -31,7 +31,9 @@ interface BookingData {
 }
 
 const RentManagement = () => {
-  const { data, isError, isLoading } = useGetAllRentalDetailsQuery(undefined);
+  const { data, isError, isLoading } = useGetAllRentalDetailsQuery(undefined, {
+    pollingInterval: 10000
+  });
   const [sendData] = useCalculateTotalCostMutation();
   const [returnTimes, setReturnTimes] = useState<{ [key: string]: string }>({});
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
