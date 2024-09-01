@@ -107,16 +107,16 @@ const RentManagement = () => {
           <Table className="w-full">
             <TableHeader>
               <TableRow className="bg-gray-100">
-                <TableHead className="px-2 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">
+                <TableHead className="px-2 py-3 text-left text-xs font-medium text-black uppercase tracking-wider">
                   Image
                 </TableHead>
-                <TableHead className="px-2 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider"> Name</TableHead>
-                <TableHead className="px-2 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Start Time</TableHead>
-                <TableHead className="px-2 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Current Return Time</TableHead>
+                <TableHead className="px-2 py-3 text-left text-xs font-medium text-black uppercase tracking-wider"> Name</TableHead>
+                <TableHead className="px-2 py-3 text-left text-xs font-medium text-black uppercase tracking-wider">Start Time</TableHead>
+                <TableHead className="px-2 py-3 text-left text-xs font-medium text-black uppercase tracking-wider">Current Return Time</TableHead>
 
-                <TableHead className="px-2 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">New Return Time</TableHead>
-                <TableHead className="px-2 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Total Cost</TableHead>
-                <TableHead className="px-2 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Action</TableHead>
+                <TableHead className="px-2 py-3 text-left text-xs font-medium text-black uppercase tracking-wider">New Return Time</TableHead>
+                <TableHead className="px-2 py-3 text-left text-xs font-medium text-black uppercase tracking-wider">Total Cost</TableHead>
+                <TableHead className="px-2 py-3 text-left text-xs font-medium text-black uppercase tracking-wider">Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
