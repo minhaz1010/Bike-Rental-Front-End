@@ -31,12 +31,30 @@ export const bikeApi = baseApi.injectEndpoints({
         method:"GET"
       })
     }),
+    getAllRentalDetails:builder.query({
+      query:()=>({
+        url:"/rentals/all-rentals",
+        method:"GET"
+      }),
+      providesTags:['Rentals'],
+
+    }),
     deleteABike:builder.mutation({
       query:(userInfo)=>{
         const {id} = userInfo;
         return {
           url:`/bikes/${id}`,
           method:"DELETE"
+        }
+      },
+      invalidatesTags:['Bikes']
+    }),
+    fullPayment:builder.mutation({
+      query:(id)=>{
+        console.log(id,'id from api');
+        return {
+          url:`/rentals/full-payment/${id}`,
+          method:"POST"
         }
       },
       invalidatesTags:['Bikes']
@@ -51,6 +69,21 @@ export const bikeApi = baseApi.injectEndpoints({
       },
       invalidatesTags:['Bikes']
     }),
+    calculateTotalCost:builder.mutation({
+      query:(bookingInfo)=>{
+    console.log('dhukse ekhane',bookingInfo);
+        const {id,returnTime} = bookingInfo;
+        console.log('id',id);
+        console.log('return time',returnTime);
+        return {
+          url:`/rentals/calculate-total-cost/${id}`,
+          method:"PATCH",
+          body:{returnTime}
+        }
+      },
+      invalidatesTags:['Rentals']
+    }),
+  
     addABike:builder.mutation({
       query:(bikeInfo:BikeFormData)=>{
         const updatedBikeInfo = {
@@ -70,11 +103,12 @@ export const bikeApi = baseApi.injectEndpoints({
           body:updatedBikeInfo
         }
       },
-      invalidatesTags:['Bikes']
+      invalidatesTags:['Bikes'],
+      
      
     })
   })
 })
 
 
-export const {useGetAllBikesQuery,useGetSingleBikeQuery,useRentABikeMutation,useGetStatusOfMyRentalBikeQuery,useDeleteABikeMutation,useUpdateABikeInformationMutation,useAddABikeMutation} = bikeApi;
+export const {useGetAllBikesQuery,useGetSingleBikeQuery,useRentABikeMutation,useGetStatusOfMyRentalBikeQuery,useDeleteABikeMutation,useUpdateABikeInformationMutation,useAddABikeMutation,useGetAllRentalDetailsQuery,useCalculateTotalCostMutation,useFullPaymentMutation} = bikeApi;
