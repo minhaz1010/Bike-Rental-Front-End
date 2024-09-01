@@ -25,6 +25,16 @@ export const bikeApi = baseApi.injectEndpoints({
       }),
       invalidatesTags:['Bikes']
     }),
+    fullPayment:builder.mutation({
+      query:(id)=>{
+        console.log(id,'id from api');
+        return {
+          url:`/rentals/full-payment/${id}`,
+          method:"POST"
+        }
+      },
+      invalidatesTags:['Bikes']
+    }),
     getStatusOfMyRentalBike:builder.query({
       query:()=>({
         url:"/rentals",
@@ -49,16 +59,7 @@ export const bikeApi = baseApi.injectEndpoints({
       },
       invalidatesTags:['Bikes']
     }),
-    fullPayment:builder.mutation({
-      query:(id)=>{
-        console.log(id,'id from api');
-        return {
-          url:`/rentals/full-payment/${id}`,
-          method:"POST"
-        }
-      },
-      invalidatesTags:['Bikes']
-    }),
+  
     updateABikeInformation:builder.mutation({
       query:(bikeInfo)=>{
         return {

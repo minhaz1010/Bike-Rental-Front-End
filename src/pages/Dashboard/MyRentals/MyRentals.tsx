@@ -8,6 +8,7 @@ import { formatDate } from '@/utils/formatDate';
 
 const MyRentals = () => {
   const [activeTab, setActiveTab] = useState('unpaid');
+  const [loadingId, setLoadingId] = useState<string | null>(null); // State for tracking loading button
 
   const { data, isError, isLoading } = useGetStatusOfMyRentalBikeQuery(undefined);
   const [sendData] = useFullPaymentMutation();
@@ -19,8 +20,6 @@ const MyRentals = () => {
     return <Loading message='Some Error Occurred' />;
   }
 
-
-
   const rentals: TBookingData[] = data?.data || [];
   const paidRentals = rentals.filter((rental) => rental.bookingStatus === "FULL_PAID");
   const unpaidRentals = rentals.filter((rental) => rental.bookingStatus === "INITIAL_PAID");
@@ -30,6 +29,7 @@ const MyRentals = () => {
   };
 
   const handlePayment = async (rentalId: string) => {
+    setLoadingId(rentalId); // Set loading state to true
     try {
       const response = await sendData(rentalId).unwrap();
       console.log(response, 'response');
@@ -39,11 +39,11 @@ const MyRentals = () => {
       toast.error('Some Error', {
         position: "top-right",
         duration: 3000
-      })
+      });
+    } finally {
+      setLoadingId(null); // Reset loading state
     }
   };
-
-
 
   return (
     <div className="my-rentals">
@@ -78,11 +78,11 @@ const MyRentals = () => {
             <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
               <thead className="bg-gray-50 dark:bg-gray-800">
                 <tr>
-                  <th className="px-6 py-3 text-left text-lg font-medium text-black  uppercase tracking-wider">Bike Name</th>
-                  <th className="px-6 py-3 text-left text-lg font-medium text-black  uppercase tracking-wider">Start Time</th>
-                  <th className="px-6 py-3 text-left text-lg font-medium text-black  uppercase tracking-wider">Return Time</th>
-                  <th className="px-6 py-3 text-left text-lg font-medium text-black  uppercase tracking-wider">Total Cost</th>
-                  <th className="px-6 py-3 text-left text-lg font-medium text-black  uppercase tracking-wider">Action</th>
+                  <th className="px-6 py-3 text-left text-lg font-medium text-black uppercase tracking-wider">Bike Name</th>
+                  <th className="px-6 py-3 text-left text-lg font-medium text-black uppercase tracking-wider">Start Time</th>
+                  <th className="px-6 py-3 text-left text-lg font-medium text-black uppercase tracking-wider">Return Time</th>
+                  <th className="px-6 py-3 text-left text-lg font-medium text-black uppercase tracking-wider">Total Cost</th>
+                  <th className="px-6 py-3 text-left text-lg font-medium text-black uppercase tracking-wider">Action</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-900 dark:divide-gray-700">
@@ -95,10 +95,11 @@ const MyRentals = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-base font-medium">
                       <Button
                         variant="default"
-                        className="text-white"
+                        className={`text-white ${loadingId === rental._id ? 'bg-blue-400' : 'bg-blue-600'}`} // Change button color based on loading state
                         onClick={() => handlePayment(rental._id)}
+                        disabled={loadingId === rental._id} // Disable button when loading
                       >
-                        Pay
+                        {loadingId === rental._id ? 'Processing...' : 'Pay'} {/* Change button text when loading */}
                       </Button>
                     </td>
                   </tr>
