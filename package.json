@@ -1,8 +1,9 @@
 {
-  "name": "client",
+  "name": "bike-rental",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "keywords": ["typescript","react","redux","bike-rental","full-stack"],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
