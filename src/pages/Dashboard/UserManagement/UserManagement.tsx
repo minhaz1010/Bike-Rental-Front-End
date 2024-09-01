@@ -2,15 +2,8 @@ import React from 'react';
 import { useDeleteAUserMutation, useGetAllUsersQuery, useUpdateUserRoleMutation } from '@/redux/features/profile/profileApi';
 import Loading from '@/components/Shared/Loading';
 import toast, { Toaster } from 'react-hot-toast';
+import { TUser } from '@/types';
 
-interface TUser {
-  _id: string;
-  name: string;
-  address: string;
-  phone: string;
-  email: string;
-  role: string;
-}
 
 const UserManagement: React.FC = () => {
   const { data, isLoading, isError } = useGetAllUsersQuery(undefined);

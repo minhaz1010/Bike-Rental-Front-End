@@ -1,36 +1,25 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { User, Mail, Phone } from 'lucide-react';
 import { FaAddressCard } from 'react-icons/fa';
 import { useGetMyProfileQuery, useUpdateMyProfileMutation } from '@/redux/features/profile/profileApi';
 import Loading from '../Shared/Loading';
 import toast, { Toaster } from 'react-hot-toast';
+import { TProfileFormInputs, TProfileSchema } from '@/types/schema.type';
+import { TCustomProfile } from '@/types';
 
-const profileSchema = z.object({
-  fullName: z.string().min(1, 'Full name is required').optional(),
-  email: z.string().email('Invalid email address').optional(),
-  address: z.string().optional(),
-  mobileNumber: z.string().min(1, 'Mobile number is required').optional(),
-});
 
-type TCustomProfile = {
-  name: string | "",
-  email: string | "",
-  phone: string | "",
-  address: string | "",
-  role: string | ""
-}
 
-type ProfileFormInputs = z.infer<typeof profileSchema>;
+
+
 
 const UpdateProfileComponent: React.FC = () => {
 
 
 
-  const { register, handleSubmit, formState: { errors } } = useForm<ProfileFormInputs>({
-    resolver: zodResolver(profileSchema),
+  const { register, handleSubmit, formState: { errors } } = useForm<TProfileFormInputs>({
+    resolver: zodResolver(TProfileSchema),
   });
 
   const { data, isError, isLoading } = useGetMyProfileQuery(undefined);
@@ -46,7 +35,7 @@ const UpdateProfileComponent: React.FC = () => {
   const profile: TCustomProfile = data?.data;
 
 
-  const onSubmit: SubmitHandler<ProfileFormInputs> = async (data) => {
+  const onSubmit: SubmitHandler<TProfileFormInputs> = async (data) => {
     const userInfo: Partial<TCustomProfile> = {
       name: data.fullName || "",
       email: data.email || "",

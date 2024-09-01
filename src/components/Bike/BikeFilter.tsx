@@ -1,27 +1,18 @@
 import React, { useState } from 'react';
 import { useGetAllBikesQuery } from '@/redux/features/bike/bikeApi';
-import { TBike } from '@/types';
+import { TBike, TFilterProps, TFilterState } from '@/types';
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Search } from 'lucide-react'
 import BikeCard from './BikeCard';
 import { Button } from "@/components/ui/button"
 
-interface FilterProps {
-  onFilterChange: (filters: FilterState) => void;
-}
 
-interface FilterState {
-  brand: string;
-  model: string;
-  isAvailable: boolean | null;
-  search: string;
-}
 
-const ITEMS_PER_PAGE = 9; // Number of bikes per page
+const ITEMS_PER_PAGE = 6;
 
-const BikeFilter: React.FC<FilterProps> = ({ onFilterChange }) => {
-  const [filters, setFilters] = useState<FilterState>({
+const BikeFilter: React.FC<TFilterProps> = ({ onFilterChange }) => {
+  const [filters, setFilters] = useState<TFilterState>({
     brand: '',
     model: '',
     isAvailable: null,
@@ -72,16 +63,16 @@ const BikeFilter: React.FC<FilterProps> = ({ onFilterChange }) => {
     const newFilters = {
       ...filters,
       [name]: value,
-      search: '' // Clear search when filters change
+      search: ''
     };
     if (name === 'isAvailable') {
       newFilters.isAvailable = value === '' ? null : value === 'true';
     }
     if (name === 'brand') {
-      newFilters.model = ''; // Reset model when brand changes
+      newFilters.model = '';
     }
     setFilters(newFilters);
-    setCurrentPage(1); // Reset to first page when filters change
+    setCurrentPage(1);
     onFilterChange(newFilters);
   };
 
@@ -90,12 +81,12 @@ const BikeFilter: React.FC<FilterProps> = ({ onFilterChange }) => {
     const newFilters = {
       ...filters,
       search: value,
-      brand: '', // Clear brand filter when searching
-      model: '', // Clear model filter when searching
-      isAvailable: null // Clear availability filter when searching
+      brand: '',
+      model: '',
+      isAvailable: null
     };
     setFilters(newFilters);
-    setCurrentPage(1); // Reset to first page when search changes
+    setCurrentPage(1);
     onFilterChange(newFilters);
   };
 
@@ -175,7 +166,6 @@ const BikeFilter: React.FC<FilterProps> = ({ onFilterChange }) => {
         ))}
       </div>
 
-      {/* Pagination controls */}
       {totalPages > 1 && (
         <div className="flex justify-center items-center space-x-2 mt-8">
           <Button

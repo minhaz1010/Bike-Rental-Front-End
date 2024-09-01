@@ -3,22 +3,13 @@
 
 import { logOutAUser } from '@/redux/features/auth/authSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
+import { TDropdownItem, TNavItem } from '@/types';
 import { decodeToken } from '@/utils/DecodeJwt';
 import { useState, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-interface NavItem {
-  text: string;
-  href?: string;
-  dropdown?: boolean;
-  onClick?: () => void;
-}
 
-interface DropdownItem {
-  text: string;
-  href: string;
-}
 
 const SideNavbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
@@ -63,14 +54,14 @@ const SideNavbar = () => {
     navigate('/login');
   };
 
-  const userNavItems: NavItem[] = [
+  const userNavItems: TNavItem[] = [
     { text: 'Home', href: '/' },
     { text: 'Available Bikes', href: '/dashboard/available-bikes' },
     { text: 'Profile', dropdown: true },
     { text: 'Log Out', href: '', onClick: handleLogout },
   ];
 
-  const adminNavItems: NavItem[] = [
+  const adminNavItems: TNavItem[] = [
     { text: 'Home', href: '/' },
     { text: 'Available Bikes', href: '/dashboard/available-bikes' },
     { text: 'Profile', dropdown: true },
@@ -80,18 +71,18 @@ const SideNavbar = () => {
     { text: 'Log Out', href: '', onClick: handleLogout },
   ];
 
-  const userDropdownItems: DropdownItem[] = [
+  const userDropdownItems: TDropdownItem[] = [
     { text: 'My-Profile', href: '/dashboard/profile' },
     { text: 'Update-Profile', href: '/dashboard/update-profile' },
     { text: 'My-Rentals', href: '/dashboard/my-rentals' },
   ];
 
-  const adminDropdownItems: DropdownItem[] = [
+  const adminDropdownItems: TDropdownItem[] = [
     { text: 'My-Profile', href: '/dashboard/profile' },
     { text: 'Update-Profile', href: '/dashboard/update-profile' },
   ];
 
-  const bikeManagementItems: DropdownItem[] = [
+  const bikeManagementItems: TDropdownItem[] = [
     { text: 'Add Bike', href: '/dashboard/add-bike' },
     { text: 'Manage Bikes', href: '/dashboard/manage-bike' },
 

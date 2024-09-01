@@ -1,16 +1,10 @@
 import { Mail, Phone, MapPin } from 'lucide-react';
-// import profileImg from "../../assets/profile.jpeg"
 import profileImg from "../../../assets/profile.jpeg"
 import Loading from '@/components/Shared/Loading';
 import { useGetMyProfileQuery } from '@/redux/features/profile/profileApi';
+import { TProfile } from '@/types';
 
-type TProfile = {
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
-  imageUrl: string;
-};
+
 
 const Profile = () => {
 

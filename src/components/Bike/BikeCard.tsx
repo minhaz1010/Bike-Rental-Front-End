@@ -1,7 +1,7 @@
 
 
 import React from 'react';
-import { TBike } from '@/types';
+import { TBikeCardProps } from '@/types';
 import bikeIcon from "../../assets/bycicle.png";
 import { Toaster } from 'react-hot-toast';
 import BikeImage from './BikeImage';
@@ -9,13 +9,9 @@ import BikeDetails from './BikeDetails';
 import ViewDetailsButton from './ViewDetailsButton';
 import ManageBikeDialog from './ManageBikeDialog';
 
-interface BikeCardProps {
-  bike: TBike;
-  status: 'view' | 'delete';
-  onDelete?: (id: string) => void;
-}
 
-const BikeCard: React.FC<BikeCardProps> = ({ bike, status, onDelete }) => {
+
+const BikeCard: React.FC<TBikeCardProps> = ({ bike, status, onDelete }) => {
   return (
     <div className="relative new-amsterdam-regular flex flex-col mt-6 text-gray-700 bg-white shadow-md rounded-xl w-full">
       <BikeImage imageUrl={bike.imageUrl} name={bike.name} />

@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { format } from 'date-fns';
 import Loading from '@/components/Shared/Loading';
 import { useFullPaymentMutation, useGetStatusOfMyRentalBikeQuery } from '@/redux/features/bike/bikeApi';
 import { Button } from '@/components/ui/button';
 import toast, { Toaster } from 'react-hot-toast';
+import { TBookingData } from '@/types';
+import { formatDate } from '@/utils/formatDate';
 
 const MyRentals = () => {
   const [activeTab, setActiveTab] = useState('unpaid');
@@ -18,22 +19,9 @@ const MyRentals = () => {
     return <Loading message='Some Error Occurred' />;
   }
 
-  interface BookingData {
-    _id: string;
-    bikeId: {
-      _id: string;
-      name: string;
-      imageUrl: string;
-    };
-    bookingStatus: string;
-    transactionId: string;
-    startTime: string;
-    returnTime: string | null;
-    totalCost: number;
-    isReturned: boolean;
-  }
 
-  const rentals: BookingData[] = data?.data || [];
+
+  const rentals: TBookingData[] = data?.data || [];
   const paidRentals = rentals.filter((rental) => rental.bookingStatus === "FULL_PAID");
   const unpaidRentals = rentals.filter((rental) => rental.bookingStatus === "INITIAL_PAID");
 
@@ -55,11 +43,7 @@ const MyRentals = () => {
     }
   };
 
-  const formatDate = (isoString: string | null) => {
-    if (!isoString) return 'N/A';
-    const date = new Date(isoString);
-    return format(date, "PPpp");
-  };
+
 
   return (
     <div className="my-rentals">

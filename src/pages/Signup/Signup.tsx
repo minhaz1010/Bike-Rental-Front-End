@@ -1,36 +1,27 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
 import { Link, useNavigate } from 'react-router-dom';
 import signUpGif from "../../assets/new-sign-up.jpg";
 import { useUserSignUpApiMutation } from '@/redux/features/auth/authApi';
+import { TSignUpFormValues, TSignUpschema } from '@/types/schema.type';
 
-const schema = z.object({
-  name: z.string().min(1, { message: "Name is required" }),
-  email: z.string().email({ message: 'Invalid email address' }),
-  password: z.string().min(6, { message: 'Password must be at least 6 characters long' }),
-  phone: z.string().min(1, { message: 'Phone number is required' }),
-  address: z.string().min(1, { message: 'Address is required' }),
-});
 
-type FormValues = z.infer<typeof schema>;
 
 const SignUp: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({
-    resolver: zodResolver(schema),
+  } = useForm<TSignUpFormValues>({
+    resolver: zodResolver(TSignUpschema),
   });
 
   const navigate = useNavigate();
 
   const [signUpData] = useUserSignUpApiMutation();
 
-  const onSubmit = async (data: FormValues) => {
-    console.log(data);
+  const onSubmit = async (data: TSignUpFormValues) => {
     const userInfo = {
       name: data.name,
       email: data.email,
@@ -40,7 +31,7 @@ const SignUp: React.FC = () => {
     }
 
     await signUpData(userInfo).unwrap();
-    navigate('/login', { state: { message: 'Registration successful, please log in.' } });
+    navigate('/login');
   };
 
   return (

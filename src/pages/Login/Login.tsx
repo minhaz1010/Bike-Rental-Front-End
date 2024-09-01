@@ -1,35 +1,30 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
 import { Link, useNavigate } from 'react-router-dom';
 import logInGif from "../../assets/new-login.jpeg";
 import { useUserLogInApiMutation } from '@/redux/features/auth/authApi';
 import { useAppDispatch } from '@/redux/hook';
 import { logInAUser } from '@/redux/features/auth/authSlice';
 import toast, { Toaster } from 'react-hot-toast';
+import { TLoginFormValues, TLoginschema } from '@/types/schema.type';
 
-const schema = z.object({
-  email: z.string({ message: "Email is required" }).email({ message: 'Invalid email address' }),
-  password: z.string().min(6, { message: 'Please Provide Your Password' }),
-});
 
-type FormValues = z.infer<typeof schema>;
 
 const Login: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({
-    resolver: zodResolver(schema),
+  } = useForm<TLoginFormValues>({
+    resolver: zodResolver(TLoginschema),
   });
 
   const navigate = useNavigate();
   const [logInData] = useUserLogInApiMutation();
   const dispatch = useAppDispatch();
 
-  const onSubmit = async (data: FormValues) => {
+  const onSubmit = async (data: TLoginFormValues) => {
     try {
       const userInfo = {
         email: data.email,

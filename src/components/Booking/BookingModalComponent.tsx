@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
 import { useRentABikeMutation } from '@/redux/features/bike/bikeApi';
-import { TBike } from '@/types';
+import { TBookingModalProps } from '@/types';
 import { X, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import toast, { Toaster } from 'react-hot-toast';
 
-type BookingModalProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  bike: TBike;
-};
 
-export const BookingModalComponent: React.FC<BookingModalProps> = ({ isOpen, onClose, bike }) => {
+
+export const BookingModalComponent: React.FC<TBookingModalProps> = ({ isOpen, onClose, bike }) => {
   const [startTime, setStartTime] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [rentABike] = useRentABikeMutation();

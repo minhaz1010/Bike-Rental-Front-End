@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Loading from "@/components/Shared/Loading";
 import { useCalculateTotalCostMutation, useGetAllRentalDetailsQuery } from "@/redux/features/bike/bikeApi";
 import { format, parseISO, isBefore } from "date-fns";
@@ -14,21 +14,9 @@ import {
 import { Input } from "@/components/ui/input";
 import toast, { Toaster } from "react-hot-toast";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { TBookingData } from "@/types";
 
-interface BookingData {
-  _id: string;
-  bikeId: {
-    _id: string;
-    name: string;
-    imageUrl: string;
-  };
-  bookingStatus: string;
-  transactionId: string;
-  startTime: string;
-  returnTime: string | null;
-  totalCost: number;
-  isReturned: boolean;
-}
+
 
 const RentManagement = () => {
   const { data, isError, isLoading } = useGetAllRentalDetailsQuery(undefined, {
@@ -51,7 +39,7 @@ const RentManagement = () => {
     setErrors((prev) => ({ ...prev, [id]: "" }));
   };
 
-  const handleCalculate = async (rental: BookingData) => {
+  const handleCalculate = async (rental: TBookingData) => {
     const returnTime = returnTimes[rental._id];
 
     if (!returnTime) {
@@ -85,7 +73,6 @@ const RentManagement = () => {
       });
       console.log(response, 'response');
 
-      // Reset the calendar input
       setReturnTimes((prev) => ({ ...prev, [rental._id]: "" }));
 
     } catch (error) {
@@ -120,7 +107,7 @@ const RentManagement = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data?.data?.map((rental: BookingData) => (
+              {data?.data?.map((rental: TBookingData) => (
                 <TableRow key={rental._id} className="bg-white border-b hover:bg-gray-50">
 
                   <TableCell className="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
@@ -148,12 +135,18 @@ const RentManagement = () => {
                     {rental.totalCost} taka
                   </TableCell>
                   <TableCell className="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
-                    <Button
-                      onClick={() => handleCalculate(rental)}
-                      className="text-xs md:text-sm bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-                    >
-                      Calculate
-                    </Button>
+                    {
+                      rental.totalCost == 0 ?
+                        <Button
+                          onClick={() => handleCalculate(rental)}
+                          className="text-xs md:text-sm bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                          Calculate
+                        </Button>
+                        :
+                        <Button className="text-xs bg-blue-500 hover:bg-blue-700 hover:cursor-not-allowed text-white font-bold py-2 px-4 rounded" >Calculate</Button>
+                    }
+
                   </TableCell>
                 </TableRow>
               ))}
