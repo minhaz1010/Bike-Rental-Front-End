@@ -6,8 +6,7 @@
 3. [Features](#features)
 4. [Technology Stack](#technology-stack)
 5. [Installation Guide](#installation-guide)
-6. [Usage](#usage)
-
+6. [Demo](#snapshot)
 ## Introduction
 
 Welcome to Our Bike Rental Website! This project is a full-fledged web application built for bike rental purposes. It features a clean UI to browse bikes, book rentals, manage user profiles/logins, and handle payments, all built using modern technologies.
