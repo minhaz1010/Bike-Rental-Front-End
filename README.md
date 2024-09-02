@@ -113,5 +113,5 @@ The Bike Rental Project is a comprehensive platform for a bike lending service. 
    ```
 
 
-### SnapShot
+## SnapShot
   - [snapshot of website](https://drive.google.com/file/d/1KPNMYAxpD2lcank89YQCEFYYb1KxCYsF/view?usp=drive_link)                
