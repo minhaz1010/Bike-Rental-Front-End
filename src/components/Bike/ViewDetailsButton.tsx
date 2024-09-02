@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 import { TBike } from '@/types';
 
 interface ViewDetailsButtonProps {
@@ -9,7 +10,7 @@ interface ViewDetailsButtonProps {
 const ViewDetailsButton: React.FC<ViewDetailsButtonProps> = ({ bike }) => (
   bike.isAvailable ? (
     <Link
-      to={`/bikes/${bike._id}`}
+      to={`/bikes/${bike._id}#top`}
       className="font-bold text-center uppercase duration-300 transition-colors hover:bg-blue-500 text-lg py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md hover:shadow-lg focus:outline-none"
     >
       View Details

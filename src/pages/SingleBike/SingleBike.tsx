@@ -38,7 +38,7 @@ const SingleBike = () => {
   };
 
   return (
-    <div className="container mx-auto my-11 p-4 new-amsterdam-regular">
+    <div id='top' className="container mx-auto my-11 p-4 new-amsterdam-regular">
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="w-full lg:w-1/2 xl:w-2/5">
           <LazyLoadImage
