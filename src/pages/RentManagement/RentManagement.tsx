@@ -33,6 +33,7 @@ const RentManagement = () => {
   if (isError) {
     return <Loading message="Some Error Occurred" />;
   }
+  console.log(data.data)
 
   const handleReturnTimeChange = (id: string, value: string) => {
     setReturnTimes((prev) => ({ ...prev, [id]: value }));
@@ -108,35 +109,35 @@ const RentManagement = () => {
             </TableHeader>
             <TableBody>
               {data?.data?.map((rental: TBookingData) => (
-                <TableRow key={rental._id} className="bg-white border-b hover:bg-gray-50">
+                <TableRow key={rental?._id} className="bg-white border-b hover:bg-gray-50">
 
                   <TableCell className="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
-                    <img src={rental.bikeId.imageUrl} alt={rental.bikeId.name} className="w-48 h-32" />
+                    <img src={rental?.bikeId?.imageUrl} alt={rental?.bikeId?.name} className="w-48 h-32" />
 
                   </TableCell>
-                  <TableCell className="px-2 py-4 whitespace-nowrap text-sm text-gray-900">{rental.bikeId.name}</TableCell>
-                  <TableCell className="px-2 py-4 whitespace-nowrap text-sm text-gray-900">{format(parseISO(rental.startTime), "PP HH:mm")}</TableCell>
+                  <TableCell className="px-2 py-4 whitespace-nowrap text-sm text-gray-900">{rental?.bikeId?.name}</TableCell>
+                  <TableCell className="px-2 py-4 whitespace-nowrap text-sm text-gray-900">{format(parseISO(rental?.startTime), "PP HH:mm")}</TableCell>
                   <TableCell className="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {rental.returnTime ? format(parseISO(rental.returnTime), "PP HH:mm") : "Not set"}
+                    {rental.returnTime ? format(parseISO(rental?.returnTime), "PP HH:mm") : "Not set"}
                   </TableCell>
                   <TableCell className="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
                     {
                       !rental.returnTime ? <Input
                         type="datetime-local"
                         required
-                        value={returnTimes[rental._id] || ""}
-                        onChange={(e) => handleReturnTimeChange(rental._id, e.target.value)}
+                        value={returnTimes[rental?._id] || ""}
+                        onChange={(e) => handleReturnTimeChange(rental?._id, e.target.value)}
                         className="w-full text-xs md:text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                       /> : "Return time has been set"
                     }
-                    {errors[rental._id] && <p className="text-red-500 text-xs mt-1">{errors[rental._id]}</p>}
+                    {errors[rental._id] && <p className="text-red-500 text-xs mt-1">{errors[rental?._id]}</p>}
                   </TableCell>
                   <TableCell className="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {rental.totalCost} taka
+                    {rental?.totalCost} taka
                   </TableCell>
                   <TableCell className="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
                     {
-                      rental.totalCost == 0 ?
+                      rental?.totalCost == 0 ?
                         <Button
                           onClick={() => handleCalculate(rental)}
                           className="text-xs md:text-sm bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
